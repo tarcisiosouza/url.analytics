@@ -37,7 +37,11 @@ public class AppTest
      */
     public void testApp() throws Exception
     {
-        UrlProcessing test = new UrlProcessing ("https://de.wikipedia.org/wiki/Wahl_zum_19._Deutschen_Bundestag");
+        UrlProcessing test = new UrlProcessing ();
+        test.findEntities("https://de.wikipedia.org/wiki/Wahl_zum_19._Deutschen_Bundestag");
+        System.out.println(test.getAnnotations());
+        System.out.println(test.getAnnotationType());
+        test.findEntities("https://en.wikipedia.org/wiki/Barack_Obama");
         System.out.println(test.getAnnotations());
         System.out.println(test.getAnnotationType());
     }

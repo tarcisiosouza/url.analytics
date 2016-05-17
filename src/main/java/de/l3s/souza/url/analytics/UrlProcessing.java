@@ -9,6 +9,7 @@ public class UrlProcessing {
 	private String UrlAnnotations;
 	private String postProcessedUrl; //URL path after pre-processing step
 	private String annotationType;
+	private Annotations annotation;
 	
 	public String getOrigURL() {
 		return OrigURL;
@@ -42,14 +43,17 @@ public class UrlProcessing {
 		this.UrlAnnotations = annotations;
 	}
 
-	public UrlProcessing(String url) throws Exception {
+	public UrlProcessing () throws Exception
+	{
+		annotation = new Annotations();
+		annotation.initialize();	
+	}
+	public void findEntities (String url) throws Exception {
 		
 		OrigURL = url;
 		URLUtils urlUtils = new URLUtils ();
 		urlUtils.loadStopwords();
 		postProcessedUrl = urlUtils.preProcess(OrigURL);
-		Annotations annotation = new Annotations();
-		annotation.initialize();
 		annotation.annotate(postProcessedUrl);
 		UrlAnnotations = annotation.getAnnotationText();
 		annotationType = annotation.getAnnotationType();
