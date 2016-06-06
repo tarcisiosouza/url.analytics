@@ -26,8 +26,9 @@ public class StanfordNLPUtils {
 		 * 
 		 */
 		public StanfordNLPUtils() {
+			String serializedClassifier = "english.all.3class.distsim.crf.ser.gz";
 			AbstractSequenceClassifier<CoreLabel> engLishClassifier = CRFClassifier
-					.getClassifierNoExceptions("english.all.3class.distsim.crf.ser.gz");
+					.getClassifierNoExceptions(serializedClassifier);
 			AbstractSequenceClassifier<CoreLabel> germanClassifier = CRFClassifier
 					.getClassifierNoExceptions("dewac_175m_600.crf.ser.gz");
 
@@ -47,7 +48,7 @@ public class StanfordNLPUtils {
 		public void changeGermanClassifier(int nr) {
 			AbstractSequenceClassifier<CoreLabel> germanClassifier;
 			if (nr == 0)
-				germanClassifier = CRFClassifier.getClassifierNoExceptions("hgc_175m_600.crf.ser.gz");
+				germanClassifier = CRFClassifier.getClassifierNoExceptions("hgc_175m_600.crf.ser.gz ");
 			else
 				germanClassifier = CRFClassifier.getClassifierNoExceptions("dewac_175m_600.crf.ser.gz");
 			classifiers.put(Language.DE, germanClassifier);

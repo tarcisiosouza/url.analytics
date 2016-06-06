@@ -67,7 +67,8 @@ public class Annotations {
 
 	public void annotate (String input)
 	{
-		setLanguage(input);
+		String firstLetterUpCaseStr = CapsFirst (input);
+		setLanguage(firstLetterUpCaseStr);
 		
 		for (int i=0;i<3;i++)
 		{
@@ -75,9 +76,9 @@ public class Annotations {
 			{
 				try {
 					if (lang.elementAt(i).contentEquals("de"))
-						annotations = nlp.annotateEntities(input, Language.DE);
+						annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.DE);
 					else
-						annotations = nlp.annotateEntities(input, Language.EN);
+						annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.EN);
 				} catch (Exception e) {
 					
 					e.printStackTrace();
@@ -87,7 +88,7 @@ public class Annotations {
 				for (Triple<String, Integer, Integer> el : annotations) {
 					
 					annotationType = el.first;
-					annotationText = input.substring(el.second, el.third).toLowerCase();
+					annotationText = firstLetterUpCaseStr.substring(el.second, el.third).toLowerCase();
 
 				}
 				
@@ -98,7 +99,7 @@ public class Annotations {
 		if (!lang.contains("de")&&!lang.contains("en"))
 		{
 			try {
-				annotations = nlp.annotateEntities(input, Language.EN);
+				annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.EN);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -107,9 +108,22 @@ public class Annotations {
 			for (Triple<String, Integer, Integer> el : annotations) {
 				
 				annotationType = el.first;
-				annotationText = input.substring(el.second, el.third).toLowerCase();
+				annotationText = firstLetterUpCaseStr.substring(el.second, el.third).toLowerCase();
 
 			}
 		}
+	}
+	
+	String CapsFirst(String str) {
+	    String[] words = str.split(" ");
+	    StringBuilder ret = new StringBuilder();
+	    for(int i = 0; i < words.length; i++) {
+	        ret.append(Character.toUpperCase(words[i].charAt(0)));
+	        ret.append(words[i].substring(1));
+	        if(i < words.length - 1) {
+	            ret.append(' ');
+	        }
+	    }
+	    return ret.toString();
 	}
 }

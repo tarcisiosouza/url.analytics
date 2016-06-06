@@ -21,24 +21,18 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-<dependency>
-    <groupId>edu.stanford.nlp</groupId>
-    <artifactId>stanford-corenlp</artifactId>
-    <version>3.6.0</version>
-</dependency>
-<dependency>
-    <groupId>edu.stanford.nlp</groupId>
-    <artifactId>stanford-corenlp</artifactId>
-    <version>3.6.0</version>
-    <classifier>models</classifier>
-</dependency>
-<dependency>
-    <groupId>edu.stanford.nlp</groupId>
-    <artifactId>stanford-corenlp</artifactId>
-    <version>3.6.0</version>
-    <classifier>models-german</classifier>
-</dependency>
-<dependency> 
+     <dependency>
+        <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+                <version>3.4.1</version>
+                </dependency>
+                <dependency>
+                    <groupId>edu.stanford.nlp</groupId>
+                        <artifactId>stanford-corenlp</artifactId>
+                            <version>3.4.1</version>
+                                <classifier>models</classifier>
+                                </dependency>
+                                <dependency> 
 <groupId>cngram</groupId> 
 <artifactId>cngram</artifactId> 
 <version>0.0.1</version> 
@@ -49,5 +43,4 @@ ${basedir}/src/lib/cngram.jar
 </dependency>
                  
   </dependencies>
- 
 </project>

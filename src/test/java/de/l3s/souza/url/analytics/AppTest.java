@@ -38,11 +38,9 @@ public class AppTest
     public void testApp() throws Exception
     {
         UrlProcessing test = new UrlProcessing ();
-        test.findEntities("https://de.wikipedia.org/wiki/Wahl_zum_19._Deutschen_Bundestag");
+        test.findEntities("http://edition.cnn.com/2016/04/24/politics/michael_jackson/angela_merkel/barack_obama/dilma_rousseff");
         System.out.println(test.getAnnotations());
         System.out.println(test.getAnnotationType());
-        test.findEntities("https://en.wikipedia.org/wiki/Barack_Obama");
-        System.out.println(test.getAnnotations());
-        System.out.println(test.getAnnotationType());
+    
     }
 }
