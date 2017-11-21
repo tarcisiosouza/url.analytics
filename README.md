@@ -1,15 +1,15 @@
-ElasticSearchClient@L3S
+URLAnalitcs@L3S
 =================
 
-Elastic Search client at L3S for Java applications
+A tool to extract entities from URLs:
 
 1. If you want to add it as a dependency in your maven project:
 -----------------------------------
 
 		<dependency>
-			<groupId>de.l3s</groupId>
-			<artifactId>elasticquery</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>de.l3s.souza</groupId>
+			<artifactId>url.analytics</artifactId>
+			<version>1.0-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
     
@@ -28,19 +28,8 @@ mvn eclipse:eclipse
 -----------------------------------
 ```
 //For every query it returns a HashMap with the Articles and the BM25 scores
-String query = "Angela Merkel";
-int limit = 1000; //total number of documents to retrieve
-Map<Article, Double> documents = new HashMap<Article, Double>();
-		new ElasticMain(query, limit, "url");
-		ElasticMain.run();
-		documents = ElasticMain.getResult();
-		System.out.println("Total documents: " + documents.size());
-		for (Entry<Article, Double> s : documents.entrySet())
-			System.out.print(s.getKey().getTimestamp() + " " + s.getKey().getUrl() + " " + s.getKey().getScore() + " \n");
-
+UrlProcessing test = new UrlProcessing ();
+test.findEntities("http://edition.cnn.com/2016/04/24/politics/michael_jackson/angela_merkel/barack_obama/dilma_rousseff");
+System.out.println(test.getAnnotations());
+System.out.println(test.getAnnotationType());
 ```
-2. If you want full-text search:
------------------------------------
-```
-Change the 'url' field to 'text'
-new ElasticMain(query, limit, "text");
