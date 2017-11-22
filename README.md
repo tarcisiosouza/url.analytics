@@ -41,4 +41,11 @@ for (int i=0;i<results.size();i++)
    System.out.print ("Entity: "+ results.get(i).getText());
    System.out.print (" Type: "+ results.get(i).getType() + "\n");
 }
+
+Output:
+
+Entity: deutschland Type: Location
+Entity: jamaika Type: Location
+Entity: christian lindner Type: Person
+Entity: frank walter steinmeier Type: Person
 ```
