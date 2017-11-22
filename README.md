@@ -30,22 +30,22 @@ mvn eclipse:eclipse
 String url = "http://www.spiegel.de/politik/deutschland/news-christian-lindner-angela-merkel-jamaika-frank-walter-steinmeier-a-1179461.html";
     
 UrlProcessing test = new UrlProcessing ();
-test.findEntities(url);
+test.findEntitiesTagMe(url);
        
-//Arraylist containing Entity objects with the Text and Type of Entity (Person, Location, Organization)
 ArrayList<Entity> results = new ArrayList<Entity>();  
 results = test.getEntities();
      
 for (int i=0;i<results.size();i++)
 {
-   System.out.print ("Entity: "+ results.get(i).getText());
-   System.out.print (" Type: "+ results.get(i).getType() + "\n");
+      System.out.print ("Text: "+ results.get(i).getText());
+      System.out.print (" Entity: "+ results.get(i).getwikiEntity() + "\n");
 }
 
 Output:
 
-Entity: deutschland Type: Location
-Entity: jamaika Type: Location
-Entity: christian lindner Type: Person
-Entity: frank walter steinmeier Type: Person
+Text: politik Entity: A Rush of Blood to the Head
+Text: deutschland Entity: Germany
+Text: christian lindner Entity: Christian Lindner
+Text: angela merkel Entity: Angela Merkel
+Text: frank walter steinmeier Entity: Frank-Walter Steinmeier
 ```
