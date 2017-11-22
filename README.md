@@ -29,16 +29,16 @@ mvn eclipse:eclipse
 ```
 String url = "http://www.spiegel.de/politik/deutschland/news-christian-lindner-angela-merkel-jamaika-frank-walter-steinmeier-a-1179461.html";
     
-        UrlProcessing test = new UrlProcessing ();
-        test.findEntities(url);
+UrlProcessing test = new UrlProcessing ();
+test.findEntities(url);
        
-        //Arraylist containing Entity objects with the Text and Type of Entity (Person, Location, Organization)
-        ArrayList<Entity> results = new ArrayList<Entity>();  
-        results = test.getEntities();
+//Arraylist containing Entity objects with the Text and Type of Entity (Person, Location, Organization)
+ArrayList<Entity> results = new ArrayList<Entity>();  
+results = test.getEntities();
      
-        for (int i=0;i<results.size();i++)
-        {
-        	System.out.print ("Entity: "+ results.get(i).getText());
-        	System.out.print (" Type: "+ results.get(i).getType() + "\n");
-        }
+for (int i=0;i<results.size();i++)
+{
+   System.out.print ("Entity: "+ results.get(i).getText());
+   System.out.print (" Type: "+ results.get(i).getType() + "\n");
+}
 ```
