@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Vector;
 
 import edu.stanford.nlp.util.Triple;
+import it.enricocandino.tagme4j.TagMeClient;
 
 public class Annotations {
 	
 	private static StanfordNLPUtils nlp;
+	private static TagMeNLPUtils tnlp;
 	private static LanguageProcessor lp;
 	private static Vector<String> lang;
 	private static List<Triple<String, Integer, Integer>> annotations;
@@ -17,8 +19,9 @@ public class Annotations {
 	private ArrayList<Entity> entities;
 	public void initialize() throws Exception
 	{
-		nlp = new StanfordNLPUtils ();
+		//nlp = new StanfordNLPUtils ();
 		lp = new LanguageProcessor ();
+		tnlp = new TagMeNLPUtils ();
 		entities = new ArrayList<Entity> ();
 		annotationText = null;
 		annotationType = null;
@@ -78,65 +81,10 @@ public class Annotations {
 		this.annotationType = annotationType;
 	}
 
-	public void annotate (String input) throws Exception
+	public void annotate (String input,TagMeClient tagMeClient) throws Exception
 	{
-		String firstLetterUpCaseStr = input;
-		setLanguage(firstLetterUpCaseStr);
 		
-		
-		
-		for (int i=0;i<3;i++)
-		{
-			if (lang.elementAt(i).contentEquals("de") || lang.elementAt(i).contentEquals("en"))
-			{
-				try {
-					if (lang.elementAt(i).contentEquals("de"))
-					{
-						annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.DE);
-						entities = nlp.getEntities(firstLetterUpCaseStr,Language.DE);
-					}
-					else
-					{
-						annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.EN);
-						entities = nlp.getEntities(firstLetterUpCaseStr,Language.EN);
-					}
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
-				
-				annotationText = null;
-				for (Triple<String, Integer, Integer> el : annotations) {
-					
-					annotationType = el.first;
-					annotationText = firstLetterUpCaseStr.substring(el.second, el.third).toLowerCase();
-					//Entity currentEntity = new Entity (annotationText,annotationType);
-					//entities.add(currentEntity);
-					
-				}
-				
-				break;	
-			}
-		
-		}
-		if (!lang.contains("de")&&!lang.contains("en"))
-		{
-			try {
-				annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.EN);
-				entities = nlp.getEntities(firstLetterUpCaseStr,Language.EN);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			for (Triple<String, Integer, Integer> el : annotations) {
-				
-				annotationType = el.first;
-				annotationText = firstLetterUpCaseStr.substring(el.second, el.third).toLowerCase();
-				//Entity currentEntity = new Entity (annotationText,annotationType);
-				//entities.add(currentEntity);
-			}
-		}
+		entities = tnlp.getEntities(input,tagMeClient);
 	}
 	
 }

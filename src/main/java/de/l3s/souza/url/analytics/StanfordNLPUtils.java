@@ -164,7 +164,7 @@ public class StanfordNLPUtils {
 				while (	m.find())
 				{
 					String name = m.group(1);
-					Entity entity = new Entity (name,"Organization");
+					Entity entity = new Entity (name,"O");
 					
 					if (!addedEntities.contains(name.toLowerCase()))
 						result.add(entity);

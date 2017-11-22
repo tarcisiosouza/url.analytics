@@ -1,4 +1,6 @@
 http
+index
+news
 https
 ftp
 www

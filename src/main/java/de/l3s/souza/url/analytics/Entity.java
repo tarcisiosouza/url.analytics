@@ -2,11 +2,11 @@ package de.l3s.souza.url.analytics;
 
 public class Entity {
 	private String text;
-	private String type;
+	private String wikiEntity;
 	
 	public Entity(String text, String type) {
 		this.text = text;
-		this.type = type;
+		this.wikiEntity = type;
 	}
 
 	public String getText() {
@@ -16,11 +16,11 @@ public class Entity {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public String getType() {
-		return type;
+	public String getwikiEntity() {
+		return wikiEntity;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setwikiEntity(String type) {
+		this.wikiEntity = type;
 	}
 	
 	

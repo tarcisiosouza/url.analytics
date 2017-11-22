@@ -42,15 +42,15 @@ public class AppTest
     	String url = "http://www.spiegel.de/politik/deutschland/news-christian-lindner-angela-merkel-jamaika-frank-walter-steinmeier-a-1179461.html";
     
         UrlProcessing test = new UrlProcessing ();
-        test.findEntities(url);
+        test.findEntitiesTagMe(url);
        
         ArrayList<Entity> results = new ArrayList<Entity>();  
         results = test.getEntities();
      
         for (int i=0;i<results.size();i++)
         {
-        	System.out.print ("Entity: "+ results.get(i).getText());
-        	System.out.print (" Type: "+ results.get(i).getType() + "\n");
+        	System.out.print ("Text: "+ results.get(i).getText());
+        	System.out.print (" Entity: "+ results.get(i).getwikiEntity() + "\n");
         }
     }
 }
