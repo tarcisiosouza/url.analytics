@@ -27,9 +27,18 @@ mvn eclipse:eclipse
 2. Example of using the client in your java code:
 -----------------------------------
 ```
-//For every query it returns a HashMap with the Articles and the BM25 scores
-UrlProcessing test = new UrlProcessing ();
-test.findEntities("http://edition.cnn.com/2016/04/24/politics/michael_jackson/angela_merkel/barack_obama/dilma_rousseff");
-System.out.println(test.getAnnotations());
-System.out.println(test.getAnnotationType());
+String url = "http://www.spiegel.de/politik/deutschland/news-christian-lindner-angela-merkel-jamaika-frank-walter-steinmeier-a-1179461.html";
+    
+        UrlProcessing test = new UrlProcessing ();
+        test.findEntities(url);
+       
+        //Arraylist containing Entity objects with the Text and Type of Entity (Person, Location, Organization)
+        ArrayList<Entity> results = new ArrayList<Entity>();  
+        results = test.getEntities();
+     
+        for (int i=0;i<results.size();i++)
+        {
+        	System.out.print ("Entity: "+ results.get(i).getText());
+        	System.out.print (" Type: "+ results.get(i).getType() + "\n");
+        }
 ```
