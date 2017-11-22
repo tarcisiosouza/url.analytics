@@ -1,5 +1,6 @@
 package de.l3s.souza.url.analytics;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -13,15 +14,27 @@ public class Annotations {
 	private static List<Triple<String, Integer, Integer>> annotations;
 	private String annotationText;
 	private String annotationType;
-	
+	private ArrayList<Entity> entities;
 	public void initialize() throws Exception
 	{
 		nlp = new StanfordNLPUtils ();
 		lp = new LanguageProcessor ();
+		entities = new ArrayList<Entity> ();
 		annotationText = null;
 		annotationType = null;
 	}
 	
+	
+	public ArrayList<Entity> getEntities() {
+		return entities;
+	}
+
+
+	public void setEntities(ArrayList<Entity> entities) {
+		this.entities = entities;
+	}
+
+
 	public void setLanguage (String input)
 	{
 		lang = lp.detectLanguage(input);
@@ -65,10 +78,12 @@ public class Annotations {
 		this.annotationType = annotationType;
 	}
 
-	public void annotate (String input)
+	public void annotate (String input) throws Exception
 	{
-		String firstLetterUpCaseStr = CapsFirst (input);
+		String firstLetterUpCaseStr = input;
 		setLanguage(firstLetterUpCaseStr);
+		
+		
 		
 		for (int i=0;i<3;i++)
 		{
@@ -76,9 +91,15 @@ public class Annotations {
 			{
 				try {
 					if (lang.elementAt(i).contentEquals("de"))
+					{
 						annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.DE);
+						entities = nlp.getEntities(firstLetterUpCaseStr,Language.DE);
+					}
 					else
+					{
 						annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.EN);
+						entities = nlp.getEntities(firstLetterUpCaseStr,Language.EN);
+					}
 				} catch (Exception e) {
 					
 					e.printStackTrace();
@@ -89,7 +110,9 @@ public class Annotations {
 					
 					annotationType = el.first;
 					annotationText = firstLetterUpCaseStr.substring(el.second, el.third).toLowerCase();
-
+					//Entity currentEntity = new Entity (annotationText,annotationType);
+					//entities.add(currentEntity);
+					
 				}
 				
 				break;	
@@ -100,6 +123,7 @@ public class Annotations {
 		{
 			try {
 				annotations = nlp.annotateEntities(firstLetterUpCaseStr, Language.EN);
+				entities = nlp.getEntities(firstLetterUpCaseStr,Language.EN);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -109,21 +133,10 @@ public class Annotations {
 				
 				annotationType = el.first;
 				annotationText = firstLetterUpCaseStr.substring(el.second, el.third).toLowerCase();
-
+				//Entity currentEntity = new Entity (annotationText,annotationType);
+				//entities.add(currentEntity);
 			}
 		}
 	}
 	
-	String CapsFirst(String str) {
-	    String[] words = str.split(" ");
-	    StringBuilder ret = new StringBuilder();
-	    for(int i = 0; i < words.length; i++) {
-	        ret.append(Character.toUpperCase(words[i].charAt(0)));
-	        ret.append(words[i].substring(1));
-	        if(i < words.length - 1) {
-	            ret.append(' ');
-	        }
-	    }
-	    return ret.toString();
-	}
 }

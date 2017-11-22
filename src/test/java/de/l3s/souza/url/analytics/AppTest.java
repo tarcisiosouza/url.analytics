@@ -2,6 +2,7 @@ package de.l3s.souza.url.analytics;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -37,10 +38,19 @@ public class AppTest
      */
     public void testApp() throws Exception
     {
-        UrlProcessing test = new UrlProcessing ();
-        test.findEntities("http://edition.cnn.com/2016/04/24/politics/michael_jackson/angela_merkel/barack_obama/dilma_rousseff");
-        System.out.println(test.getAnnotations());
-        System.out.println(test.getAnnotationType());
+    	
+    	String url = "http://www.spiegel.de/politik/deutschland/news-christian-lindner-angela-merkel-jamaika-frank-walter-steinmeier-a-1179461.html";
     
+        UrlProcessing test = new UrlProcessing ();
+        test.findEntities(url);
+       
+        ArrayList<Entity> results = new ArrayList<Entity>();  
+        results = test.getEntities();
+     
+        for (int i=0;i<results.size();i++)
+        {
+        	System.out.print ("Entity: "+ results.get(i).getText());
+        	System.out.print (" Type: "+ results.get(i).getType() + "\n");
+        }
     }
 }

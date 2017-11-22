@@ -2,6 +2,7 @@ package de.l3s.souza.url.analytics;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 public class UrlProcessing {
 	
@@ -23,6 +24,10 @@ public class UrlProcessing {
 		this.annotationType = annotationType;
 	}
 
+	public ArrayList<Entity> getEntities ()
+	{
+		return annotation.getEntities();
+	}
 	public String getPath() {
 		return postProcessedUrl;
 	}
